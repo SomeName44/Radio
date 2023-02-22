@@ -1,37 +1,17 @@
 package ru.netology.radio;
 
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import ru.netology.radio.Radio;
 
 
 public class RadioTests {
-    Radio radio = new Radio();
-    Radio vol = new Radio();
-
-    @Test
-    public void test() {
-        Radio radio = new Radio();
-
-        Assertions.assertEquals(0, radio.getMinRadioNumber());
-        Assertions.assertEquals(9, radio.getMaxRadioNumber());
-        Assertions.assertEquals(0, radio.getRadioNumber());
-    }
-
-    @Test
-    public void testSize() {
-        Radio radio = new Radio(10);
-
-        Assertions.assertEquals(0, radio.getMinRadioNumber());
-        Assertions.assertEquals(9, radio.getMaxRadioNumber());
-        Assertions.assertEquals(0, radio.getRadioNumber());
-    }
-
-
     @ParameterizedTest //Проверка номер радиостанции от 0 до 9
     @CsvFileSource(files = "src/test/resources/setRadioNumber.cvs")
     public void shouldSetRadioNumber(int expected, int radioNumber) {
+        Radio radio = new Radio();
         radio.setRadioNumber(radioNumber);
 
         int actual = radio.getRadioNumber();
@@ -40,6 +20,7 @@ public class RadioTests {
 
     @Test //Максимальная станция
     public void shouldSetToMaxNumber() {
+        Radio radio = new Radio();
         radio.setToMaxNumber();
 
         int expected = 9;
@@ -50,7 +31,7 @@ public class RadioTests {
     @ParameterizedTest // Переключение радио на след. радиостанцию
     @CsvFileSource(files = "src/test/resources/nextRadioNumber.cvs")
     public void shouldNextRadioNumber(int expected, int newRadioNumber) {
-
+        Radio radio = new Radio();
         radio.setRadioNumber(newRadioNumber);
         radio.nextRadioNumber();
 
@@ -61,6 +42,7 @@ public class RadioTests {
     @ParameterizedTest // Переключение радио на предыдущую радиостанцию
     @CsvFileSource(files = "src/test/resources/prevRadioNumber.cvs")
     public void shouldPrevRadioNumber(int expected, int newRadioNumber) {
+        Radio radio = new Radio();
         radio.setRadioNumber(newRadioNumber);
         radio.prevRadioNumber();
 
@@ -68,43 +50,47 @@ public class RadioTests {
         Assertions.assertEquals(expected, actual);
     }
 
-// ЗВУК
+//////////// Volume
 
     @ParameterizedTest //Проверка звука в диапозоне от 0 до 10
     @CsvFileSource(files = "src/test/resources/setSoundVolume.cvs")
     public void shouldSetSoundVolume(int expected, int newSoundVolume) {
-        vol.setSoundVolume(newSoundVolume);
+        Radio radio = new Radio();
+        radio.setSoundVolume(newSoundVolume);
 
-        int actual = vol.getSoundVolume();
+        int actual = radio.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @Test //Максимальный звук
     public void shouldSetToMaxVolume() {
-        vol.setToMaxVolume();
+        Radio radio = new Radio();
+        radio.setToMaxVolume();
 
-        int expected = 100;
-        int actual = vol.getSoundVolume();
+        int expected = 10;
+        int actual = radio.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest //Проверка увеличения звука
     @CsvFileSource(files = "src/test/resources/nextSoundVolume.cvs")
     public void shouldNextSoundVolume(int expected, int newSoundVolume) {
-        vol.setSoundVolume(newSoundVolume);
-        vol.nextSoundVolume();
+        Radio radio = new Radio();
+        radio.setSoundVolume(newSoundVolume);
+        radio.nextSoundVolume();
 
-        int actual = vol.getSoundVolume();
+        int actual = radio.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 
     @ParameterizedTest //Проверка уменьшения звука
     @CsvFileSource(files = "src/test/resources/prevSoundVolume.cvs")
     public void shouldPrevSoundVolume(int expected, int newSoundVolume) {
-        vol.setSoundVolume(newSoundVolume);
-        vol.prevSoundVolume();
+        Radio radio = new Radio();
+        radio.setSoundVolume(newSoundVolume);
+        radio.prevSoundVolume();
 
-        int actual = vol.getSoundVolume();
+        int actual = radio.getSoundVolume();
         Assertions.assertEquals(expected, actual);
     }
 }
