@@ -1,81 +1,80 @@
 package ru.netology.radio;
 
 public class Radio {
-    private int radioNumber;
-    private int soundVolume;
+    private int currentStation;
+    public int minStation = 0;
+    public int maxStation = 9;
+    private int currentVolume;
+    public int minVolume = 0;
+    public int maxVolume = 100;
 
-    //  РАДИО
-    public int getRadioNumber() {
-        return radioNumber;
+
+    public Radio() {
+
     }
 
-    public void setRadioNumber(int newRadioNumber) {
-        if (newRadioNumber < 0) {
+    public Radio(int amountStation) {
+        maxStation = amountStation - 1;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
+    public void setCurrentStation(int currentStation) {
+        if (currentStation < minStation || currentStation > maxStation) {
             return;
         }
-        if (newRadioNumber > 9) {
+        this.currentStation = currentStation;
+    }
+
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+
+    public void nextStation() {
+        if (maxStation == currentStation) {
+            this.currentStation = minStation;
+        } else {
+            this.currentStation = currentStation + 1;
+        }
+
+    }
+
+    public void prevStation() {
+        if (minStation == currentStation) {
+            this.currentStation = maxStation;
+        } else {
+            this.currentStation = currentStation - 1;
+        }
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        this.currentVolume = currentVolume;
+    }
+
+    public void increaseVolume() {
+        if (currentVolume == maxVolume) {
             return;
-        }
-        radioNumber = newRadioNumber;
-    }
-
-    public void setToMaxNumber() {
-
-    }
-
-
-    public int nextRadioNumber() {
-        if (radioNumber >= 9) {
-            radioNumber = 0;
         } else {
-            radioNumber = radioNumber + 1;
+            this.currentVolume = currentVolume + 1;
         }
-        return radioNumber;
     }
 
-    public int prevRadioNumber() {
-        if (radioNumber <= 0) {
-            radioNumber = 9;
-        } else {
-            radioNumber = radioNumber - 1;
-        }
-        return radioNumber;
-    }
-
-    //  ЗВУК
-    public int getSoundVolume() {
-        return soundVolume;
-    }
-
-    public void setSoundVolume(int newSoundVolume) {
-        if (newSoundVolume < 0) {
+    public void decreaseVolume() {
+        if (currentVolume == minVolume) {
             return;
-        }
-        if (newSoundVolume > 10) {
-            return;
-        }
-        soundVolume = newSoundVolume;
-    }
-
-    public void setToMaxVolume() {
-
-    }
-
-    public int nextSoundVolume() {
-        if (soundVolume >= 10) {
-            soundVolume = 10;
         } else {
-            soundVolume = soundVolume + 1;
+            this.currentVolume = currentVolume - 1;
         }
-        return soundVolume;
-    }
-
-    public int prevSoundVolume() {
-        if (soundVolume <= 0) {
-            soundVolume = 0;
-        } else {
-            soundVolume = soundVolume - 1;
-        }
-        return soundVolume;
     }
 }

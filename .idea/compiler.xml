@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="RadioMan" />
+        <module name="Radio" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Radio" target="11" />
+      <module name="RadioMan" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
